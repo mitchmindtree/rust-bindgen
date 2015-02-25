@@ -35,52 +35,53 @@ fn main() {
     }
 
     if let Some(clang_dir) = maybe_clang_dir {
-        let libs = qw![
-            LLVMAnalysis
-            LLVMBitReader
-            LLVMCore
-            LLVMLTO
-            LLVMLinker
-            LLVMMC
-            LLVMMCParser
-            LLVMObjCARCOpts
-            LLVMObject
-            LLVMOption
-            LLVMScalarOpts
-            LLVMSupport
-            LLVMTarget
-            LLVMTransformUtils
-            LLVMVectorize
-            LLVMipa
-            LLVMipo
-            clang
-            clangARCMigrate
-            clangAST
-            clangASTMatchers
-            clangAnalysis
-            clangBasic
-            clangDriver
-            clangEdit
-            clangFormat
-            clangFrontend
-            clangIndex
-            clangLex
-            clangParse
-            clangRewrite
-            clangRewriteFrontend
-            clangSema
-            clangSerialization
-            clangStaticAnalyzerCheckers
-            clangStaticAnalyzerCore
-            clangStaticAnalyzerFrontend
-            clangTooling
-        ];
+        println!("cargo:rustc-flags=-l clang -L {}", clang_dir.as_str().unwrap());
+        // let libs = qw![
+        //     LLVMAnalysis
+        //     LLVMBitReader
+        //     LLVMCore
+        //     LLVMLTO
+        //     LLVMLinker
+        //     LLVMMC
+        //     LLVMMCParser
+        //     LLVMObjCARCOpts
+        //     LLVMObject
+        //     LLVMOption
+        //     LLVMScalarOpts
+        //     LLVMSupport
+        //     LLVMTarget
+        //     LLVMTransformUtils
+        //     LLVMVectorize
+        //     LLVMipa
+        //     LLVMipo
+        //     clang
+        //     clangARCMigrate
+        //     clangAST
+        //     clangASTMatchers
+        //     clangAnalysis
+        //     clangBasic
+        //     clangDriver
+        //     clangEdit
+        //     clangFormat
+        //     clangFrontend
+        //     clangIndex
+        //     clangLex
+        //     clangParse
+        //     clangRewrite
+        //     clangRewriteFrontend
+        //     clangSema
+        //     clangSerialization
+        //     clangStaticAnalyzerCheckers
+        //     clangStaticAnalyzerCore
+        //     clangStaticAnalyzerFrontend
+        //     clangTooling
+        // ];
 
-        print!("cargo:rustc-flags=");
-        for lib in libs {
-            print!("-l static={} ", lib);
-        }
-        println!("-L {} -l ncursesw -l z -l stdc++", clang_dir.as_str().unwrap());
+        // print!("cargo:rustc-flags=");
+        // for lib in libs {
+        //     print!("-l static={} ", lib);
+        // }
+        // println!("-L {} -l ncursesw -l z -l stdc++", clang_dir.as_str().unwrap());
     } else {
         panic!("Unable to find {}", clang_lib);
     }
